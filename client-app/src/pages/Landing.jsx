@@ -1,7 +1,14 @@
+import image from "../assets/landing.png"; 
+import Navbar from "../components/Navbar";
+
+
 function Landing() {
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-purple-100 min-h-screen flex items-center justify-center">
-      <div className="text-center px-6 max-w-2xl">
+    <>
+    <Navbar/>
+    <div className="bg-cover bg-center min-h-screen flex items-center justify-center"
+    style={{ backgroundImage: `url(${image})` }}>
+      <div className="text-center bg-[#d7ecfa] p-6 rounded-2xl max-w-2xl">
         <h1 className="text-4xl md:text-6xl font-extrabold text-blue-800 mb-4">
           Your Career Starts Here
         </h1>
@@ -13,6 +20,7 @@ function Landing() {
         </button>
       </div>
     </div>
+    </>
   );
 }
 

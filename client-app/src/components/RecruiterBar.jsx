@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function Navbar() {
+function RecruiterBar() {
   return (
     <nav className="bg-white shadow-md px-6 py-4 flex justify-between items-center">
       <Link to="/" className="text-2xl font-bold text-blue-600">
@@ -8,12 +8,15 @@ function Navbar() {
       </Link>
       <div className="space-x-6 text-sm font-medium">
         
+        <Link to="/post-job" className="hover:text-blue-600">Post a Job</Link>
+        <Link to="/pricing" className="ml-4 text-sm text-gray-800 hover:underline">
+          Pricing
+        </Link>
 
-        <Link to="/login" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Login</Link>
-        <Link to="/signup" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Signup</Link>
+
       </div>
     </nav>
   );
 }
 
-export default Navbar;
+export default RecruiterBar;

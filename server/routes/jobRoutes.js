@@ -8,7 +8,7 @@ router.post('/', authMiddleware, async (req, res) => {
   try {
     const { title, company, location, jobType, salaryRange, skillsRequired, description } = req.body;
 
-    if (req.user.role !== 'recruiter') {
+    if (req.user.userType !== 'recruiter') {
       return res.status(403).json({ msg: 'Only recruiters can post jobs' });
     }
 
@@ -24,7 +24,7 @@ router.post('/', authMiddleware, async (req, res) => {
     });
 
     await job.save();
-    res.status(201).json(job);
+    res.status(201).json(job); 
   } catch (err) {
     res.status(500).json({ msg: 'Server error' });
   }
