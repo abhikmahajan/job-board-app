@@ -7,10 +7,18 @@ function Navbar() {
         JobBoard
       </Link>
       <div className="space-x-6 text-sm font-medium">
-        
-
-        <Link to="/login" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Login</Link>
-        <Link to="/signup" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Signup</Link>
+        <Link
+          to="/login"
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Login
+        </Link>
+        <Link
+          to="/signup"
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Signup
+        </Link>
       </div>
     </nav>
   );

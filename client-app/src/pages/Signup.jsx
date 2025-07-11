@@ -34,7 +34,10 @@ function Signup() {
         userData.resume = resume;
       }
 
-      const res = await axios.post("http://localhost:5000/api/auth/signup", userData);
+      const res = await axios.post(
+        "http://localhost:5000/api/auth/signup",
+        userData
+      );
       const { token, role } = res.data;
 
       localStorage.setItem("token", token);
@@ -62,13 +65,21 @@ function Signup() {
         <div className="flex justify-center mb-6 space-x-4">
           <button
             onClick={() => setUserType("seeker")}
-            className={`px-4 py-2 rounded ${userType === "seeker" ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700"}`}
+            className={`px-4 py-2 rounded ${
+              userType === "seeker"
+                ? "bg-blue-600 text-white"
+                : "bg-gray-200 text-gray-700"
+            }`}
           >
             Job Seeker
           </button>
           <button
             onClick={() => setUserType("recruiter")}
-            className={`px-4 py-2 rounded ${userType === "recruiter" ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700"}`}
+            className={`px-4 py-2 rounded ${
+              userType === "recruiter"
+                ? "bg-blue-600 text-white"
+                : "bg-gray-200 text-gray-700"
+            }`}
           >
             Recruiter
           </button>
@@ -76,7 +87,9 @@ function Signup() {
 
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-sm text-gray-700 mb-1">Full Name</label>
+            <label className="block text-sm text-gray-700 mb-1">
+              Full Name
+            </label>
             <input
               type="text"
               value={name}
@@ -109,7 +122,9 @@ function Signup() {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm text-gray-700 mb-1">Confirm Password</label>
+            <label className="block text-sm text-gray-700 mb-1">
+              Confirm Password
+            </label>
             <input
               type="password"
               value={confirmPassword}
@@ -121,7 +136,9 @@ function Signup() {
 
           {userType === "recruiter" && (
             <div className="mb-4">
-              <label className="block text-sm text-gray-700 mb-1">Company Name</label>
+              <label className="block text-sm text-gray-700 mb-1">
+                Company Name
+              </label>
               <input
                 type="text"
                 value={company}
@@ -134,7 +151,9 @@ function Signup() {
 
           {userType === "seeker" && (
             <div className="mb-4">
-              <label className="block text-sm text-gray-700 mb-1">Resume Link (optional)</label>
+              <label className="block text-sm text-gray-700 mb-1">
+                Resume Link (optional)
+              </label>
               <input
                 type="url"
                 value={resume}

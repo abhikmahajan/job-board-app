@@ -10,7 +10,7 @@ function Login() {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
 
     try {
       const res = await axios.post("http://localhost:5000/api/auth/login", {
@@ -32,7 +32,10 @@ function Login() {
       }
     } catch (error) {
       console.error(error);
-      alert(error?.response?.data?.msg || "Login failed. Please check your credentials.");
+      alert(
+        error?.response?.data?.msg ||
+          "Login failed. Please check your credentials."
+      );
     }
   };
 
@@ -49,7 +52,9 @@ function Login() {
             type="button"
             onClick={() => setUserType("seeker")}
             className={`px-4 py-2 rounded ${
-              userType === "seeker" ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700"
+              userType === "seeker"
+                ? "bg-blue-600 text-white"
+                : "bg-gray-200 text-gray-700"
             }`}
           >
             Job Seeker
@@ -58,7 +63,9 @@ function Login() {
             type="button"
             onClick={() => setUserType("recruiter")}
             className={`px-4 py-2 rounded ${
-              userType === "recruiter" ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700"
+              userType === "recruiter"
+                ? "bg-blue-600 text-white"
+                : "bg-gray-200 text-gray-700"
             }`}
           >
             Recruiter
@@ -82,7 +89,10 @@ function Login() {
           </div>
 
           <div className="mb-6">
-            <label htmlFor="password" className="block text-sm text-gray-700 mb-1">
+            <label
+              htmlFor="password"
+              className="block text-sm text-gray-700 mb-1"
+            >
               Password
             </label>
             <input

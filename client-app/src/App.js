@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import FindJobs from './pages/FindJobs';
-import PostJob from './pages/PostJob';
-import JobApplicationsPage from './pages/JobApplicationsPage';
-import PricingPage from './pages/PricingPage';
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import FindJobs from "./pages/FindJobs";
+import PostJob from "./pages/PostJob";
+import JobApplicationsPage from "./pages/JobApplicationsPage";
+import PricingPage from "./pages/PricingPage";
 import RecruiterDashboard from "./pages/RecruiterDashboard";
 import SeekerDashboard from "./pages/SeekerDashboard";
 
