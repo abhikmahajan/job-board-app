@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../utils/axios";
 import { useEffect, useState } from "react";
 
 function FindJobs() {
@@ -7,7 +7,7 @@ function FindJobs() {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/jobs");
+        const res = await api.get("/api/jobs");
         setJobs(res.data);
       } catch (error) {
         console.error("Error fetching jobs:", error);

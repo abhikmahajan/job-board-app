@@ -1,6 +1,7 @@
 import image from "../assets/landing.png";
 import Navbar from "../components/Navbar";
 import logo from "../assets/logo.png";
+import {Link} from "react-router-dom";
 
 function Landing() {
   return (
@@ -20,9 +21,9 @@ function Landing() {
             Find your dream job or the perfect candidate. Everything in one
             place.
           </p>
-          <button className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 text-lg">
+          <Link to="/signup" className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 text-lg">
             Get Started
-          </button>
+          </Link>
           </div>
         </div>
       </div>

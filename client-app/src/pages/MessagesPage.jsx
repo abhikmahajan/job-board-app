@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../utils/axios";
 
 const MessagesPage = ({ receiverId }) => {
   const [messages, setMessages] = useState([]);
   const [newMsg, setNewMsg] = useState("");
 
-  const token = localStorage.getItem("token");
-
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const res = await axios.get(`/api/messages/${receiverId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await api.get(`/api/messages/${receiverId}`);
         setMessages(res.data);
       } catch (err) {
         console.error(err);
@@ -23,14 +19,11 @@ const MessagesPage = ({ receiverId }) => {
 
   const sendMessage = async () => {
     try {
-      await axios.post(
+      await api.post(
         "/api/messages",
         {
           receiverId,
           content: newMsg,
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` },
         }
       );
       setMessages((prev) => [

@@ -1,16 +1,10 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useAuth } from "../context/AuthContext";
 import image from "../assets/favicon.png";
+import { useState } from "react";
 
 function Seekerbar() {
-  const [name, setName] = useState("");
-
-  useEffect(() => {
-    const storedName = localStorage.getItem("name");
-    if (storedName) {
-      setName(storedName);
-    }
-  }, []);
+  const { user, logout } = useAuth();
 
   const [open, setOpen] = useState(false);
 
@@ -30,7 +24,7 @@ function Seekerbar() {
           Find Jobs
         </Link>
         <button  onClick={() => setOpen(!open)}
-          className="hover:text-blue-600 border p-1 px-2 rounded-lg border-blue-400">👨‍🦱 {name}</button>
+          className="hover:text-blue-600 border p-1 px-2 rounded-lg border-blue-400">👨‍🦱 {user?.name || 'User'}</button>
       </div>
 
       {open && (
@@ -53,10 +47,9 @@ function Seekerbar() {
       >
         About Us
       </a>
-      <button
-        onClick={() => {
-          localStorage.removeItem("token");
-          localStorage.removeItem("role");
+            <button
+        onClick={async () => {
+          await logout();
           window.location.href = "/login";
         }}
         className="block w-full text-left px-4 py-2 text-red-600 hover:bg-red-100"

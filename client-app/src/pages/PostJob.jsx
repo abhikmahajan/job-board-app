@@ -1,6 +1,6 @@
 import { useState } from "react";
 import RecruiterBar from "../components/RecruiterBar";
-import axios from "axios";
+import api from "../utils/axios";
 
 function PostJob() {
   const [form, setForm] = useState({
@@ -21,17 +21,7 @@ function PostJob() {
     e.preventDefault();
 
     try {
-      // Get JWT token from localStorage (adjust if you use sessionStorage or a different key)
-      const token = localStorage.getItem('token');
-      await axios.post(
-        'http://localhost:5000/api/jobs',
-        form,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      await api.post('/api/jobs', form);
       alert("Job posted successfully!");
       setForm({
         title: "",

@@ -8,11 +8,16 @@ const jobRoutes = require('./routes/jobRoutes');
 const applicationRoutes = require('./routes/applicationRoutes');
 const messageRoutes = require('./routes/messageRoutes');
 const recruiterRoutes = require('./routes/recruiterRoutes');
+const cookieParser = require("cookie-parser");
 
 dotenv.config();
 const app = express();
 app.use(express.json());
-app.use(cors());  
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
+app.use(cookieParser());  
 
 // Routes
 app.use('/api/auth', auth);

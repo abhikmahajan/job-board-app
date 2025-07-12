@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../utils/axios";
 
 const JobApplicationsPage = () => {
   const [applications, setApplications] = useState([]);
@@ -7,10 +7,7 @@ const JobApplicationsPage = () => {
   useEffect(() => {
     const fetchApplications = async () => {
       try {
-        const token = localStorage.getItem("token");
-        const res = await axios.get("/api/applications/user", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await api.get("/api/applications/user");
         setApplications(res.data);
       } catch (err) {
         console.error("Error fetching applications", err);

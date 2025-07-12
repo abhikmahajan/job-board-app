@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../utils/axios";
 import RecruiterBar from "../components/RecruiterBar";
 
 const RecruiterDashboard = () => {
   const [jobs, setJobs] = useState([]);
-  const token = localStorage.getItem("token"); // ✅ token defined at top
 
   useEffect(() => {
     const fetchDashboard = async () => {
       try {
-        const res = await axios.get("/api/recruiter/dashboard", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await api.get("/api/recruiter/dashboard");
         setJobs(res.data);
       } catch (err) {
         console.error(err);
@@ -19,22 +16,19 @@ const RecruiterDashboard = () => {
     };
 
     fetchDashboard();
-  }, [token]);
+  }, []);
 
   const handleEdit = (job) => {
     const newTitle = prompt("Enter new job title:", job.title);
     const newDesc = prompt("Enter new description:", job.description);
 
     if (newTitle && newDesc) {
-      axios
+      api
         .put(
           `/api/recruiter/job/${job._id}`,
           {
             title: newTitle,
             description: newDesc,
-          },
-          {
-            headers: { Authorization: `Bearer ${token}` },
           }
         )
         .then(() => window.location.reload())
@@ -44,10 +38,8 @@ const RecruiterDashboard = () => {
 
   const handleDelete = (jobId) => {
     if (window.confirm("Are you sure you want to delete this job?")) {
-      axios
-        .delete(`/api/recruiter/job/${jobId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
+      api
+        .delete(`/api/recruiter/job/${jobId}`)
         .then(() => window.location.reload())
         .catch((err) => console.error(err));
     }

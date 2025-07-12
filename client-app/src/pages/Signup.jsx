@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useAuth } from "../context/AuthContext";
 
 function Signup() {
   const [userType, setUserType] = useState("seeker");
@@ -11,6 +11,7 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
+  const { signup } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,16 +35,9 @@ function Signup() {
         userData.resume = resume;
       }
 
-      const res = await axios.post(
-        "http://localhost:5000/api/auth/signup",
-        userData
-      );
-      const { token, role } = res.data;
+      const user = await signup(userData);
 
-      localStorage.setItem("token", token);
-      localStorage.setItem("role", role);
-
-      if (userType === "recruiter") {
+      if (user.userType === "recruiter") {
         navigate("/recruiter/dashboard");
       } else {
         navigate("/jobseeker/dashboard");

@@ -3,6 +3,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
+const authMiddleware = require('../middleware/authMiddleware');
 
 // 🔐 Environment Secret Check
 if (!process.env.JWT_SECRET) {
@@ -34,8 +35,15 @@ router.post('/signup', async (req, res) => {
       { expiresIn: '1d' }
     );
 
+    // Set HttpOnly cookie
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'Lax',
+      maxAge: 24 * 60 * 60 * 1000 // 1 day
+    });
+
     res.status(201).json({
-      token,
       user: {
         id: newUser._id,
         name: newUser.name,
@@ -69,8 +77,15 @@ router.post('/login', async (req, res) => {
       { expiresIn: '1d' }
     );
 
+    // Set HttpOnly cookie
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'Lax',
+      maxAge: 24 * 60 * 60 * 1000 // 1 day
+    });
+
     res.status(200).json({
-      token,
       user: {
         id: user._id,
         name: user.name,
@@ -84,5 +99,24 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// ✅ Get current user
+router.get('/me', authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    res.json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: 'Server error' });
+  }
+});
+
+// ✅ Logout route
+router.post('/logout', (req, res) => {
+  res.clearCookie('token', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'Lax',
+  }).json({ msg: 'Logged out successfully' });
+});
 
 module.exports = router;
