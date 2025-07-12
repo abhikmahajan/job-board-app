@@ -1,4 +1,5 @@
 import { useState } from "react";
+import RecruiterBar from "../components/RecruiterBar";
 import axios from "axios";
 
 function PostJob() {
@@ -48,6 +49,8 @@ function PostJob() {
   };
 
   return (
+    <div>
+      <RecruiterBar />
     <div className="min-h-screen p-6 bg-gray-50">
       <div className="max-w-2xl mx-auto bg-white shadow p-6 rounded">
         <h2 className="text-2xl font-bold text-blue-700 mb-4">Post a Job</h2>
@@ -148,6 +151,7 @@ function PostJob() {
           </button>
         </form>
       </div>
+    </div>
     </div>
   );
 }
