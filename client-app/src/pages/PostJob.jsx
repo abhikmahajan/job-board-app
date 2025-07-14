@@ -1,6 +1,7 @@
 import { useState } from "react";
 import RecruiterBar from "../components/RecruiterBar";
 import api from "../utils/axios";
+import { useNavigate } from "react-router-dom";
 
 function PostJob() {
   const [form, setForm] = useState({
@@ -38,10 +39,17 @@ function PostJob() {
     }
   };
 
+  const navigate = useNavigate();
+
+  const handleLogo = () => {
+    navigate("/recruiter/dashboard");
+  };
+
   return (
     <div>
       <RecruiterBar />
     <div className="min-h-screen p-6 bg-gray-50">
+      <p onClick={handleLogo} alt="Logo" className="hover:cursor-pointer text-3xl m-2 ">🔙</p>
       <div className="max-w-2xl mx-auto bg-white shadow p-6 rounded">
         <h2 className="text-2xl font-bold text-blue-700 mb-4">Post a Job</h2>
         <form onSubmit={handleSubmit} className="space-y-4">

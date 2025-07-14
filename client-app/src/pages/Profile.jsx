@@ -1,14 +1,30 @@
-
+import { useNavigate } from "react-router-dom";
 import Seekerbar from "../components/Seekerbar";
+import RecruiterBar from "../components/RecruiterBar";
 import { useAuth } from "../context/AuthContext";
 
 function Resume() {
 
+  const navigate = useNavigate();
+
+  const user = useAuth().user;
+
+  const handleLogo = () => {
+
+    if (user.userType === "recruiter") {
+        navigate("/recruiter/dashboard");
+      } else {
+        navigate("/jobseeker/dashboard");
+      }};
 
   return (
     <div>
-      <Seekerbar />
+      {useAuth().user?.userType === "seeker" &&(<Seekerbar />)}
+      {useAuth().user?.userType === "recruiter" &&(<RecruiterBar />)}
+      
+      <p onClick={handleLogo}  className="hover:cursor-pointer text-3xl m-2 ">🔙</p>
     <div className="flex flex-col items-center h-screen mt-10">
+      
       <form className="w-full max-w-md bg-gray-100 p-8 rounded-xl border shadow-lg">
         <h1 className="text-3xl font-bold mb-4">Profile</h1>
         <div className="mb-4">

@@ -36,6 +36,13 @@ function Seekerbar() {
         My Profile
       </a>
       <a
+        href="/job-applications"
+        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+      >
+        My Applications
+      </a>
+      
+      <a
         href="/company"
         className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
       >
