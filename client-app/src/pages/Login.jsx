@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import image from "../assets/logo.png";
 
 function Login() {
   const [userType, setUserType] = useState("seeker");
@@ -8,6 +9,10 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { login } = useAuth();
+
+  const handleLogo = () => {
+    navigate("/");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,11 +35,14 @@ function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen lg:p-20 p-10 bg-gray-100 ">
+    <div className="flex items-center justify-center h-screen lg:p-20 p-10 bg-blue-100 ">
       <div className="w-full max-w-md bg-white p-8 rounded shadow-md">
+        <div className="flex items-center gap-4">
+                <img src={image} alt="logo" className="w-16 hover:cursor-pointer" onClick={handleLogo}/>
         <h2 className="text-2xl font-bold text-center text-blue-700 mb-6">
           {userType === "seeker" ? "Job Seeker Login" : "Recruiter Login"}
         </h2>
+        </div>
 
         {/* User Type Switch */}
         <div className="flex justify-center mb-6 space-x-4">

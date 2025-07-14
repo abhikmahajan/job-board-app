@@ -12,7 +12,7 @@ if (!process.env.JWT_SECRET) {
 
 // ✅ Signup Route
 router.post('/signup', async (req, res) => {
-  const { name, email, password, userType } = req.body;
+  const { firstName,lastName, email, phone, password, userType } = req.body;
 
   try {
     const existingUser = await User.findOne({ email });
@@ -21,8 +21,10 @@ router.post('/signup', async (req, res) => {
 
 
     const newUser = new User({
-      name,
+      firstName,
+      lastName,
       email,
+      phone,
       password,
       userType,
     });
@@ -46,8 +48,10 @@ router.post('/signup', async (req, res) => {
     res.status(201).json({
       user: {
         id: newUser._id,
-        name: newUser.name,
+        firstName: newUser.firstName,
+        lastName: newUser.lastName,
         email: newUser.email,
+        phone: newUser.phone,
         userType: newUser.userType,
       },
     });
@@ -88,8 +92,10 @@ router.post('/login', async (req, res) => {
     res.status(200).json({
       user: {
         id: user._id,
-        name: user.name,
+        firstName: user.firstName,
+        lastName: user.lastName,
         email: user.email,
+        phone: user.phone,
         userType: user.userType,
       },
     });

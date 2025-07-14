@@ -20,13 +20,13 @@ function RecruiterBar() {
           Post a Job
         </Link>
         <Link
-          to="/pricing"
+          to="/posted-jobs"
           className="ml-4 text-sm text-gray-800 hover:underline"
         >
-          Pricing
+          Posted Jobs
         </Link>
         <button  onClick={() => setOpen(!open)}
-          className="hover:text-blue-600 border p-1 px-2 rounded-lg border-blue-400">👨‍🦱 {user?.name || 'User'}</button>
+          className="hover:text-blue-600 border p-1 px-2 rounded-lg border-blue-400">👨‍🦱 {user?.firstName || 'User'}</button>
         
       </div>
       
@@ -40,7 +40,7 @@ function RecruiterBar() {
         My Profile
       </a>
       <a
-        href="/recruiter/dashboard"
+        href="/posted-jobs"
         className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
       >
         Posted Jobs

@@ -6,7 +6,6 @@ const dotenv = require('dotenv');
 const auth = require('./routes/auth');
 const jobRoutes = require('./routes/jobRoutes');
 const applicationRoutes = require('./routes/applicationRoutes');
-const messageRoutes = require('./routes/messageRoutes');
 const recruiterRoutes = require('./routes/recruiterRoutes');
 const cookieParser = require("cookie-parser");
 
@@ -23,7 +22,6 @@ app.use(cookieParser());
 app.use('/api/auth', auth);
 app.use('/api/jobs', jobRoutes); 
 app.use('/api/applications', applicationRoutes);
-app.use('/api/messages', messageRoutes);
 app.use('/api/recruiter', recruiterRoutes); 
 
 // MongoDB connection

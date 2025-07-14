@@ -1,17 +1,24 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import image from "../assets/logo.png";
 
 function Signup() {
   const [userType, setUserType] = useState("seeker");
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [company, setCompany] = useState("");
   const [resume, setResume] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
   const { signup } = useAuth();
+
+  const handleLogo = () => {
+    navigate("/");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,8 +30,10 @@ function Signup() {
 
     try {
       const userData = {
-        name,
+        firstName,
+        lastName,
         email,
+        phone,
         password,
         userType,
       };
@@ -37,10 +46,8 @@ function Signup() {
 
       const user = await signup(userData);
 
-      if (user.userType === "recruiter") {
-        navigate("/recruiter/dashboard");
-      } else {
-        navigate("/jobseeker/dashboard");
+      if (user.userType) {
+        navigate("/login");
       }
     } catch (err) {
       console.error(err);
@@ -49,11 +56,14 @@ function Signup() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
-      <div className="w-full max-w-md bg-white p-8 rounded shadow-md">
+    <div className="flex items-center justify-center min-h-screen px-4 bg-blue-100">
+      <div className="w-full max-w-md bg-gray-100 p-8 rounded shadow-xl m-5">
+        <div className="flex items-center gap-4">
+        <img src={image} alt="logo" className="w-16 hover:cursor-pointer" onClick={handleLogo}/>
         <h2 className="text-2xl font-bold text-center text-blue-700 mb-6">
           {userType === "seeker" ? "Job Seeker Signup" : "Recruiter Signup"}
         </h2>
+        </div>
 
         {/* User Type Switch */}
         <div className="flex justify-center mb-6 space-x-4">
@@ -82,12 +92,27 @@ function Signup() {
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-sm text-gray-700 mb-1">
-              Full Name
+              First Name
             </label>
             <input
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              placeholder="John"
+              required
+              className="w-full border px-3 py-2 rounded focus:ring-2 focus:ring-blue-400"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm text-gray-700 mb-1">
+              Last Name
+            </label>
+            <input
+              type="text"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              placeholder="Doe"
               required
               className="w-full border px-3 py-2 rounded focus:ring-2 focus:ring-blue-400"
             />
@@ -99,6 +124,19 @@ function Signup() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email address"
+              required
+              className="w-full border px-3 py-2 rounded focus:ring-2 focus:ring-blue-400"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm text-gray-700 mb-1">Phone Number</label>
+            <input
+              type="phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="+91"
               required
               className="w-full border px-3 py-2 rounded focus:ring-2 focus:ring-blue-400"
             />
