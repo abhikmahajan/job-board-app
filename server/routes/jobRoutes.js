@@ -64,4 +64,17 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Get jobs posted by the current recruiter
+router.get('/my-jobs', authMiddleware, async (req, res) => {
+  try {
+    if (req.user.userType !== 'recruiter') {
+      return res.status(403).json({ msg: 'Only recruiters can view their posted jobs' });
+    }
+    const jobs = await Job.find({ recruiter: req.user.id }).sort({ createdAt: -1 });
+    res.json(jobs);
+  } catch (err) {
+    res.status(500).json({ msg: 'Server error' });
+  }
+});
+
 module.exports = router;

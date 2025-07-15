@@ -1,4 +1,4 @@
-
+import RecruiterBar from "../components/RecruiterBar";
 import api from "../utils/axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -10,7 +10,7 @@ const PostedJobs = ({showBack = true}) => {
      useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const res = await api.get("/api/jobs");
+        const res = await api.get("/api/jobs/my-jobs");
         setJobs(res.data);
       } catch (error) {
         console.error("Error fetching jobs:", error);
@@ -33,8 +33,12 @@ const PostedJobs = ({showBack = true}) => {
       return (
 
         <div>
+          
           {showBack && (
-          <p onClick={handleLogo} alt="Logo" className="hover:cursor-pointer text-3xl m-2 ">🔙</p>
+            <div>
+            <RecruiterBar />
+            <p onClick={handleLogo} alt="Logo" className="hover:cursor-pointer text-3xl m-2 ">🔙</p>
+            </div>
           )}
           
           
@@ -43,40 +47,47 @@ const PostedJobs = ({showBack = true}) => {
       </h2>
       
         <div className="grid gap-4 mt-10">
-        {jobs.map((job) => (
-          <div
-            key={job._id}
-            className="p-4 border rounded shadow-sm bg-white hover:shadow-md transition"
-          >
-            <div className="flex items-center justify-between mb-3">
-              <div>
-                <h3 className="text-xl font-semibold text-gray-800">
-                  {job.title}
-                </h3>
-                <p className="text-md text-gray-500">{job.company}</p>
-                <div className="mt-2 flex gap-5">
-                  <p className="text-sm text-gray-700">📍{job.location}</p>
-                  <p className="text-sm text-gray-700">💵{job.salaryRange}</p>
-                  <p className="text-sm text-gray-700">📃{job.jobType}</p>
+        {jobs.length === 0 ? (
+          <p className="text-center text-gray-500 text-lg">You haven’t posted any jobs yet.</p>
+        ) : (
+          jobs.map((job) => (
+            <div
+              key={job._id}
+              className="p-4 border rounded shadow-sm bg-white hover:shadow-md transition"
+            >
+              <div className="flex items-center justify-between mb-3">
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-800">
+                    {job.title}
+                  </h3>
+                  <p className="text-md text-gray-500">{job.company}</p>
+                  <div className="mt-2 flex gap-5">
+                    <p className="text-sm text-gray-700">📍{job.location}</p>
+                    <p className="text-sm text-gray-700">💵{job.salaryRange}</p>
+                    <p className="text-sm text-gray-700">📃{job.jobType}</p>
+                  </div>
+                  <p className="text-sm text-gray-700 mt-2">💻{job.skillsRequired}</p>
+                  <div className="mt-2 flex items-center text-sm text-gray-700" >
+                    <p className="font-semibold">📝 Job Description: </p>
+                  <p>
+                     {job.description?.substring(0, 100)}...
+                  </p>
+                  </div>
                 </div>
 
-                <p className="text-sm mt-2">
-                  {job.description?.substring(0, 100)}...
-                </p>
+                <button
+                  onClick={() => {
+                    setSelectedJob(job);
+                    setIsModalOpen(true);
+                  }}
+                  className="border p-2 px-6 mr-10 rounded bg-blue-500 text-white"
+                >
+                  Details
+                </button>
               </div>
-
-              <button
-                onClick={() => {
-                  setSelectedJob(job);
-                  setIsModalOpen(true);
-                }}
-                className="border p-2 px-6 mr-10 rounded bg-blue-500 text-white"
-              >
-                Details
-              </button>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
         {isModalOpen && selectedJob && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
@@ -109,9 +120,10 @@ const PostedJobs = ({showBack = true}) => {
             <p className="text-gray-800 whitespace-pre-line">
               {selectedJob.description}
             </p>
-            <button className="border p-1 bg-green-500 text-white rounded">
-              Apply
+            <button className="border p-1 bg-red-500 text-white rounded">
+              Recruited ?
             </button>
+            
           </div>
         </div>
       )}

@@ -69,9 +69,12 @@ function FindJobs() {
                   <p className="text-sm text-gray-700">📃{job.jobType}</p>
                 </div>
 
-                <p className="text-sm mt-2">
-                  {job.description?.substring(0, 100)}...
-                </p>
+                <div className="mt-2 flex items-center text-sm text-gray-700" >
+                    <p className="font-semibold">📝 Job Description: </p>
+                  <p>
+                     {job.description?.substring(0, 100)}...
+                  </p>
+                  </div>
               </div>
 
               <button
