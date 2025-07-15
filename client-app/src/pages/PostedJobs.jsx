@@ -67,6 +67,7 @@ const PostedJobs = ({showBack = true}) => {
                     <p className="text-sm text-gray-700">📃{job.jobType}</p>
                   </div>
                   <p className="text-sm text-gray-700 mt-2">💻{job.skillsRequired}</p>
+                  
                   <div className="mt-2 flex items-center text-sm text-gray-700" >
                     <p className="font-semibold">📝 Job Description: </p>
                   <p>
