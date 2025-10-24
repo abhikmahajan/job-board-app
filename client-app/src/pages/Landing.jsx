@@ -1,15 +1,16 @@
-import image from "../assets/landing.png";
 import Navbar from "../components/Navbar";
 import logo from "../assets/logo.png";
 import {Link} from "react-router-dom";
+import FindJobs from "./FindJobs";
+import Purpose from "../components/Purpose";
+import Footer from "../components/Footer";
 
-function Landing() {
+const Landing = () => {
   return (
     <>
       <Navbar />
       <div
-        className="bg-cover bg-center min-h-screen flex items-center justify-center"
-        style={{ backgroundImage: `url(${image})` }}
+        className="bg-cover bg-center min-h-screen flex items-center justify-center bg-gradient-to-r from-white via-blue-200 to-white"
       >
         <div className="flex justify-center text-center gap-10 bg-[#d7ecfa] p-6 rounded-2xl max-w-4xl">
           <div><img src={logo} className="max-w-72 rounded-2xl" alt="logo"/></div>
@@ -27,6 +28,9 @@ function Landing() {
           </div>
         </div>
       </div>
+      <FindJobs />
+      <Purpose />
+      <Footer />
     </>
   );
 }
