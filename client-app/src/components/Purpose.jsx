@@ -6,7 +6,7 @@ const Purpose = () => {
         <div className='flex justify-center items-center'>
             <h1 className='text-3xl text-blue-900 font-bold'>Why Use Our Website ?</h1>
             </div>
-            <div className="flex gap-8 mt-8 p-4">
+            <div className="flex gap-8 mt-8 p-4 mx-20">
                 <div className="flex-1 p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow">
                     <h2 className="text-xl font-semibold text-blue-800 mb-3">AI Resume Review</h2>
                     <p className="text-gray-600">

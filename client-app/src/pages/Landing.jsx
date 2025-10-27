@@ -28,9 +28,13 @@ const Landing = () => {
           </div>
         </div>
       </div>
-      <FindJobs />
+      <div className="mx-20">
+        <FindJobs />
+      </div>
       <Purpose />
       <Footer />
+      <div className="fixed bottom-0 left-0 w-full h-24 bg-gradient-to-b from-transparent to-white pointer-events-none z-[999]"></div>
+
     </>
   );
 }
